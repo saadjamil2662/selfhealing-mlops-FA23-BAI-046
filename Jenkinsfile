@@ -11,6 +11,13 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Debug') {
+    steps {
+        sh 'pwd'
+        sh 'find . -name Dockerfile'
+        sh 'cat Dockerfile'
+    }
+}
         stage('Build and Run') {
             steps {
                 sh 'docker build -t ${DOCKERHUB_USER}/sentiment-api:unstable .'
