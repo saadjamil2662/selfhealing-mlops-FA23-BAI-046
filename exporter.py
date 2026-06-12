@@ -19,7 +19,7 @@ def fetch_latest_confidence():
 if __name__ == '__main__':
     # Start up the server to expose the metrics on port 8000
     start_http_server(8000)
-    print("Prometheus exporter running on port 8000")
+    print("Prometheus  exporter running on port 8000")
     # Poll every 5 seconds
     while True:
         confidence = fetch_latest_confidence()
