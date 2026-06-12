@@ -23,8 +23,8 @@ pipeline {
                 sh 'docker build -t ${DOCKERHUB_USER}/sentiment-api:unstable .'
                 sh 'docker rm -f sentiment-app || true'
                 sh 'docker run -d --name sentiment-app -p 5000:5000 ${DOCKERHUB_USER}/sentiment-api:unstable'
-                // Wait for the app to start
-                sh 'sleep 15'
+                // Wait for the app to start (model is pre-downloaded now)
+                sh 'sleep 5'
             }
         }
         stage('Unit Test') {

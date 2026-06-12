@@ -12,6 +12,9 @@ RUN apt-get update && apt-get install -y wget gnupg unzip curl \
     && apt-get install -y google-chrome-stable \
     && rm -rf /var/lib/apt/lists/*
 
+# Pre-download the ML model to save 30-60 seconds on every container start
+RUN python -c "from transformers import pipeline; pipeline('sentiment-analysis', model='distilbert-base-uncased-finetuned-sst-2-english')"
+
 COPY . .
 EXPOSE 5000
 CMD ["python", "app.py"]
