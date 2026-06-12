@@ -7,5 +7,5 @@ receivers:
   - url: 'http://35.173.33.252:8080/generic-webhook-trigger/invoke?token=ROLLBACK_9617F8_TOKEN'
     http_config:
       basic_auth:
-        username: 'admin'
-        password: '11322772a3168d58f907f69a52e442810c'
+        username: 'YOUR_JENKINS_USERNAME'
+        password: 'YOUR_JENKINS_API_TOKEN'
