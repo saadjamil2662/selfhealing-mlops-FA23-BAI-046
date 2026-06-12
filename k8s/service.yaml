@@ -4,7 +4,6 @@ metadata:
   name: sentiment-api-service
 spec:
   type: NodePort
-  sessionAffinity: ClientIP
   selector:
     app: sentiment-api
     slot: blue
