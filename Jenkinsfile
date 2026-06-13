@@ -49,13 +49,13 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: DOCKERHUB_CREDENTIALS_ID, url: '') {
                         sh 'docker push ${DOCKERHUB_USER}/sentiment-api:unstable'
-                        // Switch to stable-fallback branch and build stable image
-                        sh 'git fetch origin'
-                        sh 'git checkout origin/stable-fallback'
+                        // Switch only app.py to stable-fallback branch to perfectly reuse Docker cache
+                        sh 'git fetch origin stable-fallback'
+                        sh 'git checkout FETCH_HEAD -- app.py'
                         sh 'docker build -t ${DOCKERHUB_USER}/sentiment-api:stable .'
                         sh 'docker push ${DOCKERHUB_USER}/sentiment-api:stable'
-                        // Revert back to main to deploy
-                        sh 'git checkout main'
+                        // Revert back app.py
+                        sh 'git checkout HEAD -- app.py'
                     }
                 }
             }
