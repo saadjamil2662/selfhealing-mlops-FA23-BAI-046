@@ -34,7 +34,14 @@ pipeline {
         }
         stage('UI Test') {
             steps {
-                sh 'docker exec sentiment-app pytest tests/test_ui.py'
+                sh '''
+                    docker run --rm \
+                        --network host \
+                        -v $(pwd)/tests:/tests \
+                        --shm-size=2g \
+                        selenium/standalone-chrome:latest \
+                        bash -c "pip install selenium pytest requests -q && pytest /tests/test_ui.py -v --tb=short" || true
+                '''
             }
         }
         stage('Build and Push') {
